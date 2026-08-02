@@ -4,17 +4,18 @@ import link from "@/model/link";
 export async function POST(request) {
   try {
     // Connect to MongoDB
+
   const mngdb = await clientPromise;
 
   const db = mngdb.db("ShortLinks")
   const collection = db.collection("url")
 
     // Get data from frontend
-    const { url, shorturl } = await request.json();
-    console.log(url)
+    const body = await request.json();
+    console.log(body)
 
-    // Backend Validation
-    if (!url || !shorturl) {
+        // Backend Validation
+    if (!body.url || !body.shorturl) {
       return Response.json(
         {
           success: false,
@@ -24,10 +25,11 @@ export async function POST(request) {
       );
     }
 
-    // Check if short URL already exists
-    const existing = await link.findOne({ shorturl });
 
-    if (existing) {
+    // Check if short URL already exists
+    const doc = await collection.findOne({shorturl: body.shorturl });
+
+    if (doc) {
       return Response.json(
         {
           success: false,
@@ -37,17 +39,28 @@ export async function POST(request) {
       );
     }
 
+    // saving the data in database
+
+    const result = await collection.insertOne({
+      url: body.url,
+      shorturl : body.shorturl
+    })
+
+
+
+
     // Save to database
-    const inp = await link.create({
-      url,
-      shorturl,
-    });
-     console.log(inp)
+    // const inp = await link.create({
+    //   url,
+    //   shorturl,
+    // });
+    //  console.log(inp)
 
     // Success response
     return Response.json(
       {
         success: true,
+        error:false,
         message: "Generated Successfully",
       },
       { status: 201 }
@@ -58,7 +71,7 @@ export async function POST(request) {
     return Response.json(
       {
         success: false,
-        message: "Internal Server Error",
+        message: error,
       },
       { status: 500 }
     );
