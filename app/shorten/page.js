@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
+import Link from "next/link";
 
 
 
@@ -30,18 +31,16 @@ const Shorten = () => {
 
     await fetch("/api/shorten", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) =>{
+
+        setgenerate(`${process.env.NEXT_HOST_ID}/${shortUrl}`),
+        seturl(""),
+        setshortUrl(""),
+        console.log(result)})
+      
       .catch((error) => console.error(error));
 
-    seturl("")
-    setshortUrl("")
-
   }
-
-
-
-
-
 
   return (
     <main className="min-h-screen bg-purple-50 flex items-center justify-center px-4 py-8">
@@ -72,6 +71,7 @@ const Shorten = () => {
           <button onClick={genLink} id = " generateBtn"className=" w-full rounded-md bg-blue-600 py-3 text-sm sm:text-base font-semibold text-white transition active:translate-y-0.75  hover:bg-blue-700">
             Generate
           </button>
+          <p>Your Link: <a target="_blank">{generate}</a></p>
         </div>
       </div>
     </main>
