@@ -15,7 +15,7 @@ const Shorten = () => {
 
     const raw = JSON.stringify({
       url: url,
-      shorturl: shortUrl,
+      shortUrl: shortUrl,
     });
 
     const requestOptions = {

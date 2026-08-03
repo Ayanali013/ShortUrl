@@ -11,7 +11,7 @@ export async function POST(request) {
   const collection = db.collection("url")
 
     // Get data from frontend
-    const {data} = await request.json();
+    const data = await request.json();
     console.log(data)
 
         // Backend Validation
@@ -27,7 +27,7 @@ export async function POST(request) {
 
 
     // Check if short URL already exists
-    const doc = await collection.findOne({shorturl: data.shorturl });
+    const doc = await collection.findOne({shorturl: data.shortUrl });
 
     if (doc) {
       return Response.json(
@@ -42,10 +42,10 @@ export async function POST(request) {
     // saving the data in database
 
     const result = await collection.insertOne({
-      url: url,
-      shortUrl : shortUrl
+      url: data.url,
+      shortUrl : data.shortUrl
     })
-
+console.log(result)
 
 
 
