@@ -74,7 +74,7 @@ const Shorten = () => {
           </button>
           {generate &&  (
             <div>
-              <p>{generate}</p>
+              <Link href={generate}>{generate}</Link>
             </div>
           )}
         </div>
