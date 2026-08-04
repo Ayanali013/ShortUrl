@@ -12,7 +12,7 @@ export default function Home() {
   return (
 
     <main className="bg-purple-100">
-      <section className="grid grid-cols-2 h-[50vh]">
+      <section className="grid grid-cols-2 h-[60vh]">
         <div className=" items-center justify-center bg-purple-100 flex flex-col gap-4">
           <p className={` text-2xl font-bold ${poppins.className} `}>
 
@@ -26,7 +26,7 @@ export default function Home() {
             <Link href="/github"><button className=' bg-purple-500 rounded-lg active:translate-y-0.75  text-white shadow-lg p-3 py-1 font-bold'>GitHub</button></Link>
           </div>
         </div>
-        <div className=" justify-start relative ">
+        <div className=" justify-start relative h-[60vh] ">
           <Image className=" mix-blend-darken w-100 h-80" src={"/vector_2.jpg"} alt="A img of vector" width={100} height={100} />
         </div>
 
